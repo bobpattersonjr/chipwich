@@ -1,0 +1,22 @@
+<Files .*>
+    Order Deny,Allow
+    Deny From All
+</Files>
+
+php_flag display_errors on
+php_value error_reporting 9999
+
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{HTTP_HOST} ^www.example.com [NC]
+RewriteRule ^(.*)$ http://example.com/$1 [L,R=301]
+
+RewriteRule robots.txt robots.php [L]
+RewriteRule ^(?:model|libs|controller|cli_extra|sqldumps|scripts|extra)\b.* error [PT]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]

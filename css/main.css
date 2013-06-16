@@ -1,0 +1,110 @@
+.item img {
+  display: block; 
+  margin: 0 auto;
+}
+
+#map_canvas{
+    width: 400px;
+    height: 300px;
+}
+
+.modal-body {
+    max-height: 800px;
+}
+
+@media (min-width: 980px) {
+    .specials {
+        table-layout: fixed;
+    }
+}
+
+.rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    font-size: 30px;
+    float: left;
+}
+.rating span.star, .rating span.star {
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+}
+.rating span.star:hover, .rating span.star:hover {
+    cursor: pointer;
+}
+.rating span.star:before, .rating span.star:before {
+    content: "\f006";
+    padding-right: 5px;
+
+}
+.rating span.star:hover:before, .rating span.selected:before, .rating span.star:hover ~ span.star:before, .rating span.selected ~ span.star:before {
+    content: "\f005";
+}
+
+.light {
+    color: rgba(85, 85, 85, 0.70);
+}
+
+.lighter {
+    color: rgba(85, 85, 85, 0.44);
+}
+
+.no_bottom {
+    margin-bottom: 0px;
+}
+
+.lazy-load, .lazy-loaded {
+    -webkit-transition: opacity 0.3s;
+    -moz-transition: opacity 0.3s;
+    -ms-transition: opacity 0.3s;
+    -o-transition: opacity 0.3s;
+    transition: opacity 0.3s;
+    opacity: 0;
+}
+
+.lazy-loaded { opacity: 1; }
+
+.hours_bar {
+    font-size: 20px;
+}
+
+/* Fine Uploader
+-------------------------------------------------- */
+.qq-upload-list {
+text-align: left;
+}
+
+/* For the bootstrapped demos */
+li.alert-success {
+background-color: #DFF0D8;
+}
+
+li.alert-error {
+background-color: #F2DEDE;
+}
+
+.alert-error .qq-upload-failed-text {
+display: inline;
+}
+
+.qq-upload-button {
+    background: #e6e6e6;
+    color: #333333;
+}
+
+/*.navbar div {
+    font-weight: 500;
+    font-size: 1.1em;
+}*/
+
+.nav_bold {
+    font-weight: 500;
+    font-size: 1.3em;
+}
+
+.desc_bold {
+    font-weight: 500;
+    font-size: 1.1em;
+}
+
