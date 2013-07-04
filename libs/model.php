@@ -11,9 +11,6 @@ class model {
         if(!isset($id)) return;
         $this->_id = $id;
 
-        if(isset(static::$_cache[get_called_class()][$this->_id]))
-            return static::$_cache[get_called_class()][$this->_id];
-
         $_fields_string = implode(',', array_keys($this->_fields));
         $result = $GLOBALS['db']->select('SELECT id, '.$_fields_string.' FROM '.$this->table.' WHERE id = :id', array(':id' => $id));
         if(isset($result[0])){
@@ -27,6 +24,20 @@ class model {
             return;
         }
         static::$_cache[get_called_class()][$this->_id] = $this;
+    }
+
+    public static function get_obj($id=null){
+        if(! isset($id)) return null;
+
+        if(isset(self::$_cache[get_called_class()]) && array_key_exists($id, self::$_cache[get_called_class()]) && self::$_cache[get_called_class()][$id] != null){
+            var_dump(self::$_cache[get_called_class()][$id]);
+            return self::$_cache[get_called_class()][$id];
+        }
+        $class = get_called_class();
+        $obj = new $class($id);
+        if($obj)
+            self::$_cache[get_called_class()][$id] = $obj;
+        return $obj;
     }
 
     public function __get($key){
