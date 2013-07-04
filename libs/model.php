@@ -4,15 +4,15 @@ class model {
     public $_id = null;
     public $_fields;
 
-    public $_cache = array();
+    public static $_cache = array();
 
     public function __construct($id=null){
         if(! isset($this->_fields) || ! is_array($this->_fields)) $this->_fields = array();
         if(!isset($id)) return;
         $this->_id = $id;
 
-        if(isset($this->_cache[$this->_id]))
-            return $this->_cache[$this->_id];
+        if(isset(static::$_cache[get_called_class()][$this->_id]))
+            return static::$_cache[get_called_class()][$this->_id];
 
         $_fields_string = implode(',', array_keys($this->_fields));
         $result = $GLOBALS['db']->select('SELECT id, '.$_fields_string.' FROM '.$this->table.' WHERE id = :id', array(':id' => $id));
@@ -26,7 +26,7 @@ class model {
             $this->_id = null;
             return;
         }
-        $this->_cache[$this->_id] = $this;
+        static::$_cache[get_called_class()][$this->_id] = $this;
     }
 
     public function __get($key){
@@ -54,13 +54,13 @@ class model {
             $this->_id = $GLOBALS['db']->lastInsertId();
         }
 
-        $this->_cache[$this->_id] = $this;
+        static::$_cache[get_called_class()][$this->_id] = $this;
 
     }
 
     public function delete(){
         $GLOBALS['db']->delete($this->table, "`id` = {$this->_id}"); 
-        unset($this->_cache[$this->_id]);
+        unset(static::$_cache[get_called_class()][$this->_id]);
     }
 
 }
