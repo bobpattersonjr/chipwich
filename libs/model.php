@@ -30,7 +30,6 @@ class model {
         if(! isset($id)) return null;
 
         if(isset(self::$_cache[get_called_class()]) && array_key_exists($id, self::$_cache[get_called_class()]) && self::$_cache[get_called_class()][$id] != null){
-            var_dump(self::$_cache[get_called_class()][$id]);
             return self::$_cache[get_called_class()][$id];
         }
         $class = get_called_class();
